@@ -14,8 +14,8 @@ import { useSocket } from "@/contexts/SocketContext";
 
 import { HUDDLES_TABS } from "@/common/constant";
 import { useTranslations } from "next-intl";
-import { HuddleLastMessage, HuddlePublicChatData } from "@/types/huddles";
 import { SocketEvent, TranslationFunction } from "@/types";
+import { HuddleLastMessage, HuddlePublicChatData } from "@/types/huddles/index";
 
 interface HuddleItemProps {
   id: number;

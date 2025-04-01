@@ -8,7 +8,7 @@ import { MediaImage } from "./Image";
 import { MEDIA_TYPES } from "@/common/constant";
 import { useTranslations } from "next-intl";
 import { TranslationFunction } from "@/types";
-import { ReplyMessage } from "@/types/huddles";
+import { ReplyMessage } from "@/types/huddles/index";
 export const Reply = ({
   roomId,
   isCurrentUser,

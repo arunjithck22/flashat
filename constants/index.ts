@@ -1,5 +1,12 @@
-import { SidebarLink } from "@/types/huddles";
 // import { useTranslations } from "next-intl";
+
+
+export interface SidebarLink {
+  imgURL: string;
+  route: string;
+  label: string;
+  activeImgURL: string;
+} 
 
 export const sidebarLinks: SidebarLink[] = [
   {

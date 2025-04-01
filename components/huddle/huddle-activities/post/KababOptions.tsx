@@ -1,4 +1,6 @@
-interface KababOptionsProps extends Partial<SenderDetails> {
+import { SenderDetails } from "@/types/huddles/index";
+
+export interface KababOptionsProps extends Partial<SenderDetails > {
   pinned: boolean;
   isCurrentUser: boolean;
   messageId: string;

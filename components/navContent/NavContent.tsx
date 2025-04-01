@@ -32,7 +32,8 @@ const NavContent = () => {
       <div className="flex flex-1 flex-col ">
         {sidebarLinks.map(({ route, imgURL, activeImgURL, label }) => {
           const isActive = pathname.startsWith(route) || pathname === route;
-          const count = { dears, fans, stars, likers }[label];
+          const countMap: Record<string, number | undefined> = { dears, fans, stars, likers };
+          const count = countMap[label];
           return (
             <Link
               prefetch

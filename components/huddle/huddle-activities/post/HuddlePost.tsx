@@ -76,12 +76,28 @@ export const HuddlePost = ({
               )}
               {!message?.sender_details?.huddle_admin_blocked && (
                 <KababOptions
-                  {...message?.sender_details}
                   pinned={message.pinned}
                   isCurrentUser={isCurrentUser}
                   messageId={message.message_id}
                   user_status={user_status}
                   sender={message?.sender}
+                  user_id={message?.sender_details?.user_id ? Number(message.sender_details.user_id) : undefined}
+                  name={message?.sender_details?.name}
+                  deleted_account={message?.sender_details?.deleted_account || false}
+                  is_premium={message?.sender_details?.is_premium}
+                  role={message?.sender_details?.role as "user" | "admin" | undefined}
+                  profile_url={message?.sender_details?.profile_url}
+                  thumbnail_url={message?.sender_details?.thumbnail_url}
+                  verified={message?.sender_details?.verified}
+                  country_name={message?.sender_details?.country_name}
+                  country_code={message?.sender_details?.country_code}
+                  blocked_by_admin={message?.sender_details?.blocked_by_admin}
+                  blocked_by_leader={message?.sender_details?.blocked_by_leader}
+                  huddle_admin_blocked={message?.sender_details?.huddle_admin_blocked}
+                  user_citizenship={message?.sender_details?.user_citizenship}
+                  user_priority={message?.sender_details?.user_priority}
+                  is_banned={message?.sender_details?.is_banned}
+                  is_blacklisted={message?.sender_details?.is_blacklisted}
                 />
               )}
             </div>

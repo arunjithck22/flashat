@@ -159,7 +159,7 @@ export interface MediaMeta {
   thumbnail: string;
 }
 
-interface SenderDetails {
+export interface SenderDetails {
   user_id?: string;
   name?: string;
   deleted_account?: boolean;
