@@ -1,6 +1,5 @@
 "use client";
 import { usePodiumAboutStats } from "@/app/hooks/podiums/usePodiumAboutStats";
-import Loading from "@/app/loading";
 import { API_STATUS } from "@/common/constant";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -81,7 +80,7 @@ const PodiumDetails = ({ podiumId }: { podiumId: string }) => {
           <JoinPodiumButton params={params} podiumId={data?.result?.id} />
         </>
       )}
-      {status === API_STATUS.PENDING && <Loading />}
+      {status === API_STATUS.PENDING && <><p>loading</p></>}
     </div>
   );
 };

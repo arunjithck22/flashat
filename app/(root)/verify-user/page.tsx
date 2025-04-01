@@ -2,7 +2,6 @@
 import { useVerifyUserRedirect } from "@/app/hooks/useVerifyUserRedirect";
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import Loading from "@/app/loading";
 import { useRouter } from "next/navigation";
 
 const VerifyUser = () => {
@@ -44,7 +43,7 @@ const VerifyUser = () => {
   if (isLoading) {
     return (
       <div className="flex w-full justify-center items-center">
-        <Loading />
+     Loading
       </div>
     );
   }

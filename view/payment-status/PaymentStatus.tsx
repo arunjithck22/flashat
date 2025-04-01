@@ -7,7 +7,6 @@ import Success from "./components/Success";
 import Failure from "./components/Failure";
 import Cancel from "./components/Cancel";
 import { useRouter } from "next/navigation";
-import Loading from "@/app/loading";
 
 interface PaymentIntentInterface {
   id: string;
@@ -191,7 +190,7 @@ const PaymentStatus = () => {
   };
 
   if (loading) {
-    return <Loading />;
+    return <>Loading</>;
   }
 
   // if (error) {
