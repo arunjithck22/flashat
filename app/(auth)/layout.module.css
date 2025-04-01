@@ -1,0 +1,7 @@
+.logo_section {
+  background-image: url("../../public/logo/logo-bg.png");
+  background-repeat: no-repeat;
+
+  background-position: left top;
+  background-size: 50%; /* Ensures the image covers the entire section */
+}

@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .background-light900_dark100 {
+    @apply bg-light-900 dark:bg-dark-100;
+  }
+
+  .base-medium {
+    @apply text-[15px] font-medium leading-[25.2px];
+  }
+
+  .base-semibold {
+    @apply text-[15px] font-semibold leading-[25.2px];
+  }
+
+  .base-bold {
+    @apply text-[15px] font-bold leading-[140%];
+  }
+}

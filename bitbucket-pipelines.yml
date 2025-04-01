@@ -1,0 +1,20 @@
+image: amazon/aws-cli
+options:
+  docker: true
+
+pipelines:
+  branches:
+    progress:
+      - step:
+          oidc: true
+          name: "Build Flashat Web App Docker Image"
+          script:
+            - IMAGE="882135585625.dkr.ecr.eu-central-1.amazonaws.com/dev-flashat-web-app"
+            - TAG=$BITBUCKET_BUILD_NUMBER
+            - export AWS_REGION=${AWS_DEVLOPMENT_REGION}
+            - export AWS_ROLE_ARN=arn:aws:iam::882135585625:role/${FLASHAT_WEB_APP_PIPELINE_ROLE_NAME}
+            - export AWS_WEB_IDENTITY_TOKEN_FILE=$(pwd)/web-identity-token
+            - echo $BITBUCKET_STEP_OIDC_TOKEN > $(pwd)/web-identity-token
+            - aws ecr get-login-password --region ${AWS_DEVLOPMENT_REGION} | docker login --username AWS --password-stdin 882135585625.dkr.ecr.eu-central-1.amazonaws.com
+            - docker build -f $DOCKERFILE -t $IMAGE:$TAG .
+            - docker push $IMAGE:$TAG
