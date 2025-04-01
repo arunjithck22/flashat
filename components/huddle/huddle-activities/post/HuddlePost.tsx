@@ -19,7 +19,7 @@ import KababOptions from "../huddle-post-options/KababOptions";
 
 import ReplyPostUI from "./reply-post-ui/ReplyPostUI";
 import EditPostUI from "./edit-post-ui/EditPostUI";
-import { HuddleMessage } from "@/types/huddles";
+import { HuddleMessage } from "@/types/huddles/index";
 
 export const HuddlePost = ({
   replyUI,

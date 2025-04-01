@@ -3,7 +3,7 @@
 import { HUDDLE_REPORTS_COMMENTS_URL } from "@/common/constant";
 import { get } from "@/service/http.service";
 import { HttpResponse, PaginatedResult } from "@/types";
-import { CommentReport } from "@/types/huddles";
+import { CommentReport } from "@/types/huddles/index";
 import { getUrlWithParam } from "@/utils/clientUtils";
 import { QueryFunctionContext, useInfiniteQuery } from "@tanstack/react-query";
 

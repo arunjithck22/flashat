@@ -6,7 +6,7 @@ import {
 } from "@/common/constant";
 import { get } from "@/service/http.service";
 import { HttpResponse,  PaginatedResult} from "@/types";
-import { Huddles,  RequestsInvitesHuddles } from "@/types/huddles";
+import { Huddles, RequestsInvitesHuddles } from "@/types/huddles/index";
 import { QueryFunctionContext, useInfiniteQuery } from "@tanstack/react-query";
 
 export const KEY_HUDDLES_QUERY = "huddles";

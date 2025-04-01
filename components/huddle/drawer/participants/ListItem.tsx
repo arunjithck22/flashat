@@ -1,4 +1,5 @@
-import { Members } from "@/types/huddles";
+
+import { Members } from "@/types/huddles/index";
 import Image from "next/image";
 import React from "react";
 

@@ -4,6 +4,7 @@ import {
 } from "@/app/hooks/huddles/useReportedMessages";
 import { API_STATUS } from "@/common/constant";
 import { useTranslations } from "next-intl";
+import { Report } from "@/types/huddles/index";
 
 import React, { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
@@ -11,7 +12,8 @@ import HuddleSkelton from "../../HuddleSkelton";
 import ReportCard from "./ReportCard";
 import { HttpResponse, TranslationFunction } from "@/types";
 import { useHuddleProvider } from "@/contexts/huddles/HuddleProvider";
-import { Report } from "@/types/huddles";
+
+
 
 const ReportedMessages = ({ active }: { active: string }) => {
   const { state } = useHuddleProvider();

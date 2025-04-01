@@ -3,7 +3,8 @@
 import { DEARS_URL } from "@/common/constant";
 import { get } from "@/service/http.service";
 import { HttpResponse, PaginatedResult } from "@/types";
-import { LikersDearsFans } from "@/types/huddles";
+import { LikersDearsFans } from "@/types/huddles/index";
+
 
 import { QueryFunctionContext, useInfiniteQuery } from "@tanstack/react-query";
 

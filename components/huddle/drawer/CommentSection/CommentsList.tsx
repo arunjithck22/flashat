@@ -13,7 +13,8 @@ import { useEffect, useState } from "react";
 import HuddleSkelton from "../../HuddleSkelton";
 import Comment from "./Comment";
 import { TranslationFunction } from "@/types";
-import { HuddleComment } from "@/types/huddles";
+import { HuddleComment } from "@/types/huddles/index";
+
 
 const CommentsList = ({
   messageId,

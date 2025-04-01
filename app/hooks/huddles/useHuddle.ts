@@ -1,7 +1,7 @@
 import { HUDDLES_URL } from "@/common/constant";
 import { get } from "@/service/http.service";
 import { HttpResponse } from "@/types";
-import { Huddles } from "@/types/huddles";
+import { Huddles } from "@/types/huddles/index";
 import { useQuery } from "@tanstack/react-query";
 
 export const QKEY_HUDDLE = "get-huddle";

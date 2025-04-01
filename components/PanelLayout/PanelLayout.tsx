@@ -1,7 +1,7 @@
 import React from "react";
 import ButtonFilter from "../ui/Tabs/ButtonFilter";
 import NoDataFound from "../NoDataFound/NoDataFound";
-import Images from "../ui/Images/Images";
+
 
 interface Tab {
   label: string;

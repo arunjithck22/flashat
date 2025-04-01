@@ -4,42 +4,42 @@ import { Icons } from "@/components/ui/icons/icons";
 import Images from "@/components/ui/Images/Images";
 import CommentTag from "./CommentTag";
 
-interface HuddleMessageCardProps{
+// interface HuddleMessageCardProps{
   
-}
+// }
 
 const HuddleMessageCard = () => {
 
-  const titleImage = [
-    {
-      path: "/icons/huddle/President.svg",
-      title: "PRESIDENT",
-    },
-    {
-      path: "/icons/huddle/Ambassador.svg",
-      title: "Ambassador",
-    },
-    {
-      path: "/icons/huddle/Citizen.svg",
-      title: "Citizen",
-    },
-    {
-      path: "/icons/huddle/Minister.svg",
-      title: "Minister",
-    },
-    {
-      path: "/icons/huddle/Officer.svg",
-      title: "Officer",
-    },
-    {
-      path: "/icons/huddle/Resident.svg",
-      title: "Resident",
-    },
-    {
-      path: "/icons/huddle/Visitor.svg",
-      title: "Visitor",
-    },
-  ];
+  // const titleImage = [
+  //   {
+  //     path: "/icons/huddle/President.svg",
+  //     title: "PRESIDENT",
+  //   },
+  //   {
+  //     path: "/icons/huddle/Ambassador.svg",
+  //     title: "Ambassador",
+  //   },
+  //   {
+  //     path: "/icons/huddle/Citizen.svg",
+  //     title: "Citizen",
+  //   },
+  //   {
+  //     path: "/icons/huddle/Minister.svg",
+  //     title: "Minister",
+  //   },
+  //   {
+  //     path: "/icons/huddle/Officer.svg",
+  //     title: "Officer",
+  //   },
+  //   {
+  //     path: "/icons/huddle/Resident.svg",
+  //     title: "Resident",
+  //   },
+  //   {
+  //     path: "/icons/huddle/Visitor.svg",
+  //     title: "Visitor",
+  //   },
+  // ];
   return (
     <div className="bg-white border border-lightGray rounded-md shadow-sm relative">
       {/* Banner Image */}

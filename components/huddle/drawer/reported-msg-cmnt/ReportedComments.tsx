@@ -10,7 +10,8 @@ import HuddleSkelton from "../../HuddleSkelton";
 import ReportCard from "./ReportCard";
 import { HttpResponse, TranslationFunction } from "@/types";
 import { useHuddleProvider } from "@/contexts/huddles/HuddleProvider";
-import { CommentReport } from "@/types/huddles";
+import { CommentReport } from "@/types/huddles/index";
+
 
 const ReportedComments = ({ active }: { active: string }) => {
   const t: TranslationFunction = useTranslations("huddles");

@@ -1,7 +1,7 @@
 import { PARTICIPANTS_URL } from "@/common/constant";
 import { get } from "@/service/http.service";
 import { HttpResponse, PaginatedResult } from "@/types";
-import { Members } from "@/types/huddles";
+import { Members } from "@/types/huddles/index";
 import { getUrlWithParam } from "@/utils/clientUtils";
 import { QueryFunctionContext, useInfiniteQuery } from "@tanstack/react-query";
 

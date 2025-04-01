@@ -5,7 +5,8 @@ import {
 } from "@/common/constant";
 import { get } from "@/service/http.service";
 import { HttpResponse, PaginatedResult } from "@/types";
-import { HuddleMessage, PinnedPost } from "@/types/huddles";
+import { HuddleMessage } from "@/types/huddles";
+import { PinnedPost } from "@/types/huddles/index";
 
 import { QueryFunctionContext, useInfiniteQuery } from "@tanstack/react-query";
 
