@@ -20,10 +20,7 @@ export const setTokens = async (
 
     const cookieOptions = {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict" as const,
       maxAge: 315360000,
-      path: "/",
     };
     await cookies().set("accessToken", encryptedAccessToken, cookieOptions);
     await cookies().set("refreshToken", encryptedRefreshToken, cookieOptions);

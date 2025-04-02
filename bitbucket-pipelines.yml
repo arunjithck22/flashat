@@ -8,6 +8,7 @@ pipelines:
       - step:
           oidc: true
           name: "Build Flashat Web App Docker Image"
+          size: 2x
           script:
             - IMAGE="882135585625.dkr.ecr.eu-central-1.amazonaws.com/dev-flashat-web-app"
             - TAG=$BITBUCKET_BUILD_NUMBER
@@ -18,3 +19,52 @@ pipelines:
             - aws ecr get-login-password --region ${AWS_DEVLOPMENT_REGION} | docker login --username AWS --password-stdin 882135585625.dkr.ecr.eu-central-1.amazonaws.com
             - docker build -f $DOCKERFILE -t $IMAGE:$TAG .
             - docker push $IMAGE:$TAG
+    development:
+      - step:
+          oidc: true
+          name: "Build Flashat Web App Docker Image"
+          size: 2x
+          script:
+            - IMAGE="882135585625.dkr.ecr.eu-central-1.amazonaws.com/dev-flashat-web-app"
+            - TAG=$BITBUCKET_BUILD_NUMBER
+            - export AWS_REGION=${AWS_DEVLOPMENT_REGION}
+            - export AWS_ROLE_ARN=arn:aws:iam::882135585625:role/${FLASHAT_WEB_APP_PIPELINE_ROLE_NAME}
+            - export AWS_WEB_IDENTITY_TOKEN_FILE=$(pwd)/web-identity-token
+            - echo $BITBUCKET_STEP_OIDC_TOKEN > $(pwd)/web-identity-token
+            - aws ecr get-login-password --region ${AWS_DEVLOPMENT_REGION} | docker login --username AWS --password-stdin 882135585625.dkr.ecr.eu-central-1.amazonaws.com
+            - docker build -f $DOCKERFILE -t $IMAGE:$TAG --build-arg NEXT_PUBLIC_REACT_APP_BACKEND_URL="https://api.eks-staging.flashat.com" --build-arg AUTH_WEBAPP_GOOGLE_CLIENT_ID=$AUTH_WEBAPP_GOOGLE_CLIENT_ID_PREPROD  --build-arg AUTH_WEBAPP_GOOGLE_CLIENT_SECRET=$AUTH_WEBAPP_GOOGLE_CLIENT_SECRET_PREPROD  --build-arg AUTH_SECRET=$AUTH_SECRET_PREPROD  --build-arg NEXT_PUBLIC_SECRET_KEY=$NEXT_PUBLIC_SECRET_KEY_PREPROD  --build-arg NEXT_PUBLIC_SOCKET_URL=$NEXT_PUBLIC_SOCKET_URL_PREPROD  --build-arg NEXT_PUBLIC_S3_BUCKET_ENV=$NEXT_PUBLIC_S3_BUCKET_ENV_PREPROD  --build-arg NEXT_PUBLIC_AWS_S3_CONFIG_URL=$NEXT_PUBLIC_AWS_S3_CONFIG_URL_PREPROD  --build-arg NEXT_PUBLIC_AGORA_APP_ID=$NEXT_PUBLIC_AGORA_APP_ID_PREPROD  --build-arg NEXT_PUBLIC_STRIPE_SECRET_KEY=$NEXT_PUBLIC_STRIPE_SECRET_KEY_PREPROD  --build-arg NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=$NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_PREPROD  --build-arg NEXT_PUBLIC_FRONTEND_URL="http://dev.webapp.flashat.com/" .
+            - docker push $IMAGE:$TAG
+    prod_test:
+      - step:
+          oidc: true
+          name: "Build Flashat Web App Docker Image"
+          size: 2x
+          script:
+            - IMAGE="882135585625.dkr.ecr.ap-southeast-1.amazonaws.com/stg-flashat-web-app"
+            - TAG=$BITBUCKET_BUILD_NUMBER
+            - export AWS_REGION=${AWS_REGION}
+            - export AWS_ROLE_ARN=arn:aws:iam::882135585625:role/${FLASHAT_WEB_APP_PIPELINE_ROLE_NAME}
+            - export AWS_WEB_IDENTITY_TOKEN_FILE=$(pwd)/web-identity-token
+            - echo $BITBUCKET_STEP_OIDC_TOKEN > $(pwd)/web-identity-token
+            - aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin 882135585625.dkr.ecr.ap-southeast-1.amazonaws.com
+            - docker build -f $STG_DOCKERFILE -t $IMAGE:$TAG --build-arg NEXT_PUBLIC_REACT_APP_BACKEND_URL=$NEXT_PUBLIC_REACT_APP_BACKEND_URL_PREPROD --build-arg AUTH_WEBAPP_GOOGLE_CLIENT_ID=$AUTH_WEBAPP_GOOGLE_CLIENT_ID_PREPROD  --build-arg AUTH_WEBAPP_GOOGLE_CLIENT_SECRET=$AUTH_WEBAPP_GOOGLE_CLIENT_SECRET_PREPROD  --build-arg AUTH_SECRET=$AUTH_SECRET_PREPROD  --build-arg NEXT_PUBLIC_SECRET_KEY=$NEXT_PUBLIC_SECRET_KEY_PREPROD  --build-arg NEXT_PUBLIC_SOCKET_URL=$NEXT_PUBLIC_SOCKET_URL_PREPROD  --build-arg NEXT_PUBLIC_S3_BUCKET_ENV=$NEXT_PUBLIC_S3_BUCKET_ENV_PREPROD  --build-arg NEXT_PUBLIC_AWS_S3_CONFIG_URL=$NEXT_PUBLIC_AWS_S3_CONFIG_URL_PREPROD  --build-arg NEXT_PUBLIC_AGORA_APP_ID=$NEXT_PUBLIC_AGORA_APP_ID_PREPROD  --build-arg NEXT_PUBLIC_STRIPE_SECRET_KEY=$NEXT_PUBLIC_STRIPE_SECRET_KEY_PREPROD  --build-arg NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=$NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_PREPROD  --build-arg NEXT_PUBLIC_FRONTEND_URL=$NEXT_PUBLIC_FRONTEND_URL_PREPROD .
+            - docker push $IMAGE:$TAG
+    release:
+      - step:
+          oidc: true
+          name: "Build Flashat Web App Docker Image"
+          size: 2x
+          script:
+            - IMAGE="882135585625.dkr.ecr.ap-southeast-1.amazonaws.com/prd-flashat-web-app"
+            - TAG=$BITBUCKET_BUILD_NUMBER
+            - export AWS_REGION=${AWS_REGION}
+            - export AWS_ROLE_ARN=arn:aws:iam::882135585625:role/${FLASHAT_WEB_APP_PIPELINE_ROLE_NAME}
+            - export AWS_WEB_IDENTITY_TOKEN_FILE=$(pwd)/web-identity-token
+            - echo $BITBUCKET_STEP_OIDC_TOKEN > $(pwd)/web-identity-token
+            - aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin 882135585625.dkr.ecr.ap-southeast-1.amazonaws.com
+            - docker build -f $PRD_DOCKERFILE -t $IMAGE:$TAG --build-arg NEXT_PUBLIC_REACT_APP_BACKEND_URL=$NEXT_PUBLIC_REACT_APP_BACKEND_URL_PROD --build-arg AUTH_WEBAPP_GOOGLE_CLIENT_ID=$AUTH_WEBAPP_GOOGLE_CLIENT_ID_PROD  --build-arg AUTH_WEBAPP_GOOGLE_CLIENT_SECRET=$AUTH_WEBAPP_GOOGLE_CLIENT_SECRET_PROD  --build-arg AUTH_SECRET=$AUTH_SECRET_PROD  --build-arg NEXT_PUBLIC_SECRET_KEY=$NEXT_PUBLIC_SECRET_KEY_PROD  --build-arg NEXT_PUBLIC_SOCKET_URL=$NEXT_PUBLIC_SOCKET_URL_PROD  --build-arg NEXT_PUBLIC_S3_BUCKET_ENV=$NEXT_PUBLIC_S3_BUCKET_ENV_PROD  --build-arg NEXT_PUBLIC_AWS_S3_CONFIG_URL=$NEXT_PUBLIC_AWS_S3_CONFIG_URL_PROD  --build-arg NEXT_PUBLIC_AGORA_APP_ID=$NEXT_PUBLIC_AGORA_APP_ID_PROD  --build-arg NEXT_PUBLIC_STRIPE_SECRET_KEY=$NEXT_PUBLIC_STRIPE_SECRET_KEY_PROD --build-arg NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=$NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_PROD  --build-arg NEXT_PUBLIC_FRONTEND_URL=$NEXT_PUBLIC_FRONTEND_URL_PROD .
+            - docker push $IMAGE:$TAG
+definitions:
+  services:
+    docker:
+      memory: 5120

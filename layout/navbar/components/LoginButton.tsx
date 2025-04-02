@@ -23,6 +23,14 @@ const  LoginButton = () => {
   }, []);
   useEffect(() => {
   }, [isAuthenticated, pathname, router]);
+
+  useEffect(() => {
+    if (isAuthenticated ) {
+      setIsModalOpen(false); 
+        router.replace("/huddle/my_huddles"); 
+    }
+  }, [isAuthenticated, isModalOpen, router, setIsModalOpen]);
+  
   return (
     <>
       {isLoading ? (

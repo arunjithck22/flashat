@@ -350,3 +350,15 @@ interface FrozenUser {
   username: string;
   verified: boolean;
 }
+
+export interface PodiumUserDetails {
+  citizenship: string;
+  coins_received: number;
+  flix_rate: number;
+  is_followed: boolean;
+  is_superstar: boolean;
+  membership: string;
+  relation: string;
+  total_likes: number;
+  
+}

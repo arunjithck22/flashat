@@ -1,0 +1,3 @@
+export const QKEY_FOLLOW_USER = "FOLLOW_USER"
+
+export const QKEY_UNFOLLOW_USER= "UNFOLLOW_USER"

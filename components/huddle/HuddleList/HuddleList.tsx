@@ -12,6 +12,7 @@ import {
   KEY_HUDDLES_QUERY,
   useHuddles,
 } from "@/app/hooks/huddles/useHuddles";
+import { Huddles, RequestsInvitesHuddles, HuddlePublicChatData } from "@/types/huddles/index";
 
 import { useSocket } from "@/contexts/SocketContext";
 import { useQueryClient } from "@tanstack/react-query";
@@ -19,7 +20,6 @@ import { HUDDLE_EVENTS } from "@/constants/events";
 
 import { useAuth } from "@/contexts/AuthContext";
 import { HttpResponse, SocketEvent } from "@/types";
-import { HuddlePublicChatData, Huddles, RequestsInvitesHuddles } from "@/types/huddles/index";
 
 interface HuddleListProps {
   type: string;

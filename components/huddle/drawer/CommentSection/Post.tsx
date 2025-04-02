@@ -12,7 +12,6 @@ import { TextMessage } from "../../huddle-activities/post/TextMessage";
 import { Sender } from "../../huddle-activities/post/Sender";
 import { MessageFooter } from "../../huddle-activities/post/MessageFooter";
 import { HuddleMessage } from "@/types/huddles";
-import { MediaMeta } from "@/types/huddles";
 
 export const Post = ({ ...messageProps }: HuddleMessage) => {
   const message: HuddleMessage = messageProps;
@@ -39,27 +38,28 @@ export const Post = ({ ...messageProps }: HuddleMessage) => {
         <Message>
           <TextMessage message={message.message} />
 
-          {(message.media_meta as MediaMeta)?.media_type === MEDIA_TYPES.IMAGE && (
+          {message.media_meta?.media_type === MEDIA_TYPES.IMAGE && (
             <MediaImage
-              {...(message.media_meta as MediaMeta)}
+              {...message.media_meta}
               messageId={message.message_id}
               roomId={message.huddle_id}
               type={message.message_type}
               mediaUrl={message.media}
             />
           )}
-          {(message.media_meta as MediaMeta)?.media_type === MEDIA_TYPES.VIDEO && (
+          {message.media_meta?.media_type === MEDIA_TYPES.VIDEO && (
             <>
               <Video
-                mime_type={(message.media_meta as MediaMeta)?.mime_type || null}
+                {...message.media_meta}
+                mime_type={message.media_meta?.mime_type || null}
                 messageId={message.message_id}
                 roomId={message.huddle_id}
               />
             </>
           )}
-          {(message.media_meta as MediaMeta)?.media_type === MEDIA_TYPES.AUDIO && (
+          {message.media_meta?.media_type === MEDIA_TYPES.AUDIO && (
             <Audio
-              {...(message.media_meta as MediaMeta)}
+              {...message.media_meta}
               messageId={message.message_id}
               roomId={message.huddle_id}
             />

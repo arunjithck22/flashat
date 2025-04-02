@@ -1,10 +1,11 @@
-import Huddles from "@/view/huddles";
+
+import PublicHuddles from "@/view/huddles/publicHuddles";
 import React from "react";
 
 const HuddlePage = () => {
   return (
     <div>
-      <Huddles />
+      <PublicHuddles />
     </div>
   );
 };

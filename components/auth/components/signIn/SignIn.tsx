@@ -37,16 +37,16 @@ const SignIn = () => {
       content: <MobileNumber setCheckPoint={setCheckPoint} />,
     },
   ];
+
   const handleForgotPassword = () => {
     setIsForgotPasswordVisible(true);
   };
+
   const handleSignUp = () => {
     setIsSignUpVisible(true);
   };
-  if (checkPoint === 0) {
-    setIsModalOpen(false)
-    router.push( `/huddles/user_managed`);
-  }
+
+  
   if (checkPoint) {
     switch (checkPoint) {
       case ProfileCheckpoints.PasswordSetup:

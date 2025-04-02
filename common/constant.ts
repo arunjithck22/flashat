@@ -39,6 +39,12 @@ const HUDDLE_APPOINT_ADMIN_URL = `${BASE_URL}/huddles/:huddleId/invitations/admi
 export const VERIFY_USER_FROM_REDIRECT_URL = `${BASE_URL}/get_usertkn_details`;
 const STARS_URL = `${BASE_URL}/user/account/stars`;
 
+export const FOLLOW_USERS_URL = `${BASE_URL}/user/star/follow`
+
+export const UNFOLLOW_USERS_URL = `${BASE_URL}/user/star/unfollow`
+
+
+
 const API_STATUS = {
   LOADING: "loading",
   SUCCESS: "success",
@@ -127,3 +133,10 @@ export const STATUS = {
   SUCCESS: "success",
   EERROR: "error",
 };
+
+export const USER_RELAITONS = {
+  STAR:"STAR",
+  LIKER:"LIKER",
+  FAN:"FAN",
+  DEAR:"DEAR"
+}

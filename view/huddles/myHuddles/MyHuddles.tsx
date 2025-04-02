@@ -1,9 +1,8 @@
 "use client";
 import PanelLayout from '@/components/PanelLayout/PanelLayout';
 import React, { useState } from 'react';
-import HuddleList from './components/HuddleList';
-import HuddleMessages from './components/HuddleMessages';
-import HuddleHeading from '@/view/huddles/components/publicHuddles/components/HuddleHeading';
+import HuddleHeading from '@/view/huddles/components/HuddleHeading';
+import HuddleMessages from '../components/HuddleMessages';
 
 const PublicHuddles = () => {
   const [selectedHuddleId, setSelectedHuddleId] = useState<number | null>(null);
@@ -21,7 +20,8 @@ const PublicHuddles = () => {
   return (
     <div>
       <PanelLayout
-        leftComponent={<HuddleList onSelectHuddle={setSelectedHuddleId} />}
+        tabDisabled={true}
+        leftComponent={<div>hello</div>}
         rightComponent={
           isDataAvailable ? (
             <HuddleMessages huddleId={selectedHuddleId} />

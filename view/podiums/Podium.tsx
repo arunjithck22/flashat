@@ -13,7 +13,7 @@ const Podiums = () => {
   const podiumId = searchParams?.get("podiumId");
   return (
     <div className="flex w-full  justify-center min-h-screen items-center">
-      <div className="md:w-full lg:max-w-md  w-full flex flex-col  border   pb-8">
+      <div className="md:w-full lg:max-w-md  w-full flex flex-col  border  ">
         <PodiumFilter currentStatus={params.type} />
 
         <PodiumList type={params.type?.toString() || ""} />

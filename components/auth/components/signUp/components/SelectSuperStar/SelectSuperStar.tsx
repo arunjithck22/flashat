@@ -14,10 +14,10 @@ import {
 } from "@/constants/queryParams/Authetication";
 import { selectSuperStar } from "@/service/signUp.service";
 import SelectSuperStarLoader from "@/components/SkeltonLoaders/SelectSuperStarLoader";
-import useScroll from "@/hooks/useScroll ";
 import { useDebounce } from "@/hooks/useDebounce";
 import Empty from "@/components/ui/Empty/Empty";
 import { SuperStar } from "@/types/signup";
+import useScroll from "@/hooks/useScroll";
 
 
 

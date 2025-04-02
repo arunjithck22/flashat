@@ -8,6 +8,7 @@ import Failure from "./components/Failure";
 import Cancel from "./components/Cancel";
 import { useRouter } from "next/navigation";
 
+
 interface PaymentIntentInterface {
   id: string;
   object: "payment_intent";

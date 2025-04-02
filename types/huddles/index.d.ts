@@ -129,7 +129,7 @@ export interface HuddleMessage {
   total_likes: number;
   room_id: string;
   pinned: boolean;
-  sender_broadcastType?: string;
+  sender_broadcastType: string;
   star_type: string;
   receiver: number;
   sent: string;
@@ -159,9 +159,9 @@ export interface MediaMeta {
   thumbnail: string;
 }
 
-export interface SenderDetails {
+interface SenderDetails {
   user_id?: string;
-  name?: string;
+  name?: string; // Now optional
   deleted_account?: boolean;
   is_premium?: boolean | undefined;
   role?: string;
@@ -177,8 +177,6 @@ export interface SenderDetails {
   user_priority?: string;
   flash_blocked?: boolean;
   id?: string;
-  is_banned?: boolean;
-  is_blacklisted?: boolean;
 }
 
 export interface Members {

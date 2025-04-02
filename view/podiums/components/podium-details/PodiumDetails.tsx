@@ -80,7 +80,7 @@ const PodiumDetails = ({ podiumId }: { podiumId: string }) => {
           <JoinPodiumButton params={params} podiumId={data?.result?.id} />
         </>
       )}
-      {status === API_STATUS.PENDING && <><p>loading</p></>}
+      {status === API_STATUS.PENDING && <>Loading</>}
     </div>
   );
 };

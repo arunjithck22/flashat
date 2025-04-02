@@ -1,5 +1,5 @@
 "use client";
-import { useAcceptSpeakInvite } from "@/app/hooks/podiums/useAcceptSpeakInvite";
+
 import { useFreezeOrUnFreezeParticipant } from "@/app/hooks/podiums/useFreezeOrUnFreezeParticipant";
 
 import Button from "@/components/ui/Button/Button";
@@ -29,7 +29,7 @@ const FreezeUserConfirmationModal = ({
       },
       {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        onSuccess: (data: any) => {
+        onSuccess: () => {
           closeModal();
           // notification.success({
           //   message: data.message,

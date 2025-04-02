@@ -4,7 +4,7 @@ import { PODIUM_USERS_DETAILS_URL } from "@/constants/podiums/apiUrls";
 import { QKEY_GET_PODIUM_USER_DETAILS } from "@/constants/podiums/queryKeys";
 import { get } from "@/service/http.service";
 import { HttpResponse } from "@/types";
-import { SinglePodium } from "@/types/podiums";
+import { PodiumUserDetails } from "@/types/podiums";
 import { getUrlWithParam } from "@/utils/clientUtils";
 import { useQuery } from "@tanstack/react-query";
 
@@ -31,7 +31,7 @@ export const usePodiumUserDetails = ({
   podiumId: string;
   participantId: string;
 }) => {
-  const response = useQuery<HttpResponse<SinglePodium>>({
+  const response = useQuery<HttpResponse<PodiumUserDetails>>({
     queryKey: [QKEY_GET_PODIUM_USER_DETAILS, podiumId],
     queryFn: () => podiumUserDetailsQueryFn({ podiumId, participantId }),
     enabled: !!podiumId,

@@ -7,6 +7,7 @@ import { usePodiumSocket } from "@/contexts/PodiumSocketContext";
 import { useSocketEvents } from "../sockets/useSocketEvents";
 import { PODIUM_EVENTS } from "@/constants/events";
 import { SocketEventMap } from "@/types";
+import { USER_CITIZENSHIP } from "@/constants/enums";
 
 
 export const useSendMessage = (podiumId: string) => {
@@ -39,14 +40,14 @@ export const useSendMessage = (podiumId: string) => {
         deleted_account: false,
         user_id: profileData?.id || 0,
         role: "user",
-        profile_url: "",
+        profile_url: profileData?.profile_photo || "/default/profile.png",
         verified: false,
-        country_name: "",
+        country_name: "United States",
         country_code: profileData?.country_code_iso || "US",
         blocked_by_admin: false,
         blocked_by_leader: false,
         huddle_admin_blocked: false,
-        user_citizenship: "",
+        user_citizenship: USER_CITIZENSHIP.CITIZEN,
         is_banned: false,
         is_blacklisted: false
       },

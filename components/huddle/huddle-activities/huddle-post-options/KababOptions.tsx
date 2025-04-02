@@ -15,17 +15,21 @@ import { SenderDetails } from "@/types/huddles";
 const KababOptions = ({
   isCurrentUser,
   pinned,
+
   messageId,
   user_status,
+
   sender,
   ...message
 }: {
   isCurrentUser: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   pinned: boolean;
   messageId: string;
   user_status: string | undefined;
   sender: number | undefined;
-} & Partial<SenderDetails>) => {
+} & SenderDetails) => {
   console.log("kabab2", message);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isOpen, setIsOpen] = useState(false);
@@ -57,43 +61,13 @@ const KababOptions = ({
           messageId={messageId}
           pinned={pinned}
           sender={sender}
-          role={message.role || "user"}
-          deleted_account={message.deleted_account || false}
-          name={message.name || ""}
-          user_id={message.user_id || 0}
-          is_premium={message.is_premium || false}
-          profile_url={message.profile_url || ""}
-          thumbnail_url={message.thumbnail_url || ""}
-          verified={message.verified || false}
-          country_name={message.country_name || ""}
-          country_code={message.country_code || ""}
-          blocked_by_admin={message.blocked_by_admin || false}
-          blocked_by_leader={message.blocked_by_leader || false}
-          huddle_admin_blocked={message.huddle_admin_blocked || false}
-          is_banned={message.is_banned || false}
-          is_blacklisted={message.is_blacklisted || false}
-          user_citizenship={message.user_citizenship || ""}
+          role={message.role || ""}
         />
       )}
       {isCurrentUser && (
         <ForOutGoingPost
           {...message}
-          is_premium={message.is_premium || false}
-          deleted_account={message.deleted_account || false}
-          name={message.name || ""}
-          user_id={message.user_id || 0}
-          role={message.role || "user"}
-          profile_url={message.profile_url || ""}
-          thumbnail_url={message.thumbnail_url || ""}
-          verified={message.verified || false}
-          country_name={message.country_name || ""}
-          country_code={message.country_code || ""}
-          blocked_by_admin={message.blocked_by_admin || false}
-          blocked_by_leader={message.blocked_by_leader || false}
-          huddle_admin_blocked={message.huddle_admin_blocked || false}
-          user_citizenship={message.user_citizenship || ""}
-          is_banned={message.is_banned || false}
-          is_blacklisted={message.is_blacklisted || false}
+          is_premium={message.is_premium}
           messageId={messageId}
           pinned={pinned}
         />

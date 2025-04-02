@@ -29,22 +29,34 @@ import PodiumBlockConfirmationModal from "./components/PodiumBlockConfirmationMo
 import PauseGiftConfirmationModal from "./components/PauseGiftConfirmationModal";
 import ResumeGiftConfirmationModal from "./components/ResumeGiftConfirmationModal";
 import { usePodiumUserDetails } from "@/app/hooks/podiums/usePodiumUsersDetails";
+import { useFollowUser } from "@/app/hooks/common/useFollowUser";
+import { useUnFollowUser } from "@/app/hooks/common/useUnFollowUser";
+import { notification } from "@/utils/toastService";
+import { API_STATUS } from "@/common/constant";
+import { useQueryClient } from "@tanstack/react-query";
+import { QKEY_FOLLOW_USER, QKEY_UNFOLLOW_USER } from "@/constants/queryKeys";
+
 
 interface LiveChatActionProps {
   sender_id: string | undefined;
   isPremium: boolean | undefined;
   closeActionsBar?: () => void;
+  loading?:boolean
 }
 
-const LiveChatActions = ({ isPremium, sender_id }: LiveChatActionProps) => {
+const LiveChatActions = ({ isPremium, sender_id,closeActionsBar }: LiveChatActionProps) => {
   const t: TranslationFunction = useTranslations("podiums");
   const { podiumData, adminsList, adminInvitesList, speakerList, frozenUsers } =
     usePodiumContext();
 
-  const {} = usePodiumUserDetails({
+  const {data:participantData,status:participantDataStatus} = usePodiumUserDetails({
     podiumId: podiumData?.id?.toString() || "",
     participantId: sender_id || "",
   });
+
+  const queryClient = useQueryClient()
+
+  console.log("participantData",participantData)
   const { profileData } = useProfileContext();
   const [makeAdminsConfirmationOpen, setMakeAdminConfirmationOpen] =
     useState(false);
@@ -71,6 +83,78 @@ const LiveChatActions = ({ isPremium, sender_id }: LiveChatActionProps) => {
   const [resumeGiftOpen, setResumeGiftOpen] = useState(false);
 
   console.log("8888", podiumData);
+
+  const followMutation = useFollowUser()
+
+  const unFollowMutation = useUnFollowUser()
+
+  const handlUnfollow = ()=>{
+    unFollowMutation.mutate(
+      {
+        data: {
+          star_id:sender_id?.toString() || ""
+        },
+      
+      },
+      {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onSuccess: (data: any) => {
+          
+          queryClient.invalidateQueries({queryKey:[QKEY_UNFOLLOW_USER]})
+          notification.success({
+            message: data.message,
+            position: "bottom-right",
+            icon: (
+              <Image
+                width={40}
+                height={40}
+                alt="logo"
+                src={"/logo/flashat-logo.png"}
+              />
+            ),
+          });
+        closeActionsBar?.()
+          
+        },
+        onError: (error) => {
+          console.error("error dismiss:", error);
+        },
+      }
+    );
+  };
+
+  const handleFollow = ()=>{  
+    followMutation.mutate(
+      {
+        data: {
+          star_id:sender_id?.toString() || ""
+        },
+      
+      },
+      {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onSuccess: (data: any) => {
+          queryClient.invalidateQueries({queryKey:[QKEY_FOLLOW_USER]})
+          notification.success({
+            message: data.message,
+            position: "bottom-right",
+            icon: (
+              <Image
+                width={40}
+                height={40}
+                alt="logo"
+                src={"/logo/flashat-logo.png"}
+              />
+            ),
+          });
+          closeActionsBar?.()
+        },
+        onError: (error) => {
+          console.error("error dismiss:", error);
+        },
+      }
+    );
+  };
 
   const ActionsForOthers = [
     {
@@ -131,6 +215,7 @@ const LiveChatActions = ({ isPremium, sender_id }: LiveChatActionProps) => {
     {
       id: 31,
       label: t("resume_gift"),
+      loading:true,
       onClick: () => setResumeGiftOpen(true),
       condition:
         podiumData?.podium_gift_paused &&
@@ -160,15 +245,21 @@ const LiveChatActions = ({ isPremium, sender_id }: LiveChatActionProps) => {
     {
       id: 5,
       label: t("unfollow"),
-      onClick: () => alert("unfollow"),
-      condition: sender_id?.toString() !== profileData?.id?.toString(),
+      onClick: () => {
+        handlUnfollow()
+      },
+      loading:unFollowMutation.isPending,
+      condition: sender_id?.toString() !== profileData?.id?.toString() && participantData?.result.is_followed && participantDataStatus === API_STATUS.SUCCESS ,
       icon: "/podiums/make-admins.svg",
     },
     {
       id: 51,
       label: t("follow"),
-      onClick: () => alert("unfollow"),
-      condition: sender_id?.toString() !== profileData?.id?.toString(),
+      loading:followMutation.isPending,
+      onClick: () => {
+        handleFollow()
+      },
+      condition: sender_id?.toString() !== profileData?.id?.toString() && !participantData?.result.is_followed && participantDataStatus === API_STATUS.SUCCESS ,
       icon: "/podiums/make-admins.svg",
     },
     // {
@@ -197,7 +288,7 @@ const LiveChatActions = ({ isPremium, sender_id }: LiveChatActionProps) => {
         (podiumData?.role === PODIUM_ROLES.MANAGER ||
           (podiumData?.role === PODIUM_ROLES.ADMIN &&
             profileData?.is_premium)) &&
-        !isUserFrozen(frozenUsers, sender_id),
+        !isUserFrozen(frozenUsers, sender_id) &&sender_id?.toString() !== profileData?.id?.toString(),
       icon: "/podiums/make-admins.svg",
     },
     {
@@ -220,8 +311,8 @@ const LiveChatActions = ({ isPremium, sender_id }: LiveChatActionProps) => {
         setPodiumBlockConfirmationModal(true);
       },
       condition:
-        podiumData?.role === PODIUM_ROLES.MANAGER ||
-        (podiumData?.role === PODIUM_ROLES.ADMIN && profileData?.is_premium),
+        (podiumData?.role === PODIUM_ROLES.MANAGER ||
+        (podiumData?.role === PODIUM_ROLES.ADMIN && profileData?.is_premium)) && sender_id?.toString() !== profileData?.id?.toString(),
       icon: "/podiums/make-admins.svg",
       textColor: "bg-red-500",
     },
@@ -250,9 +341,10 @@ const LiveChatActions = ({ isPremium, sender_id }: LiveChatActionProps) => {
         {ActionsForOthers.filter((option) => option.condition).map((option) => (
           <div
             key={option.id}
-            className="flex items-center w-full border rounded-lg gap-2 p-2 py-4 hover:bg-gray-100 cursor-pointer"
+            className="flex items-center justify-between w-full border rounded-lg gap-2 p-2 py-4 hover:bg-gray-100 cursor-pointer"
             onClick={option.onClick}
           >
+            <div className="flex items-center w-full gap-2">
             <Image
               src={option.icon}
               alt={option.label}
@@ -261,6 +353,15 @@ const LiveChatActions = ({ isPremium, sender_id }: LiveChatActionProps) => {
               className="w-5 h-5"
             />
             <span>{option.label}</span>
+            
+            </div>
+            {
+              option?.loading && <div className="px-2">
+                <div
+              className={`w-5 h-5  border-2 border-primary border-t-transparent rounded-full animate-spin`}
+            ></div>
+              </div>
+            }
           </div>
         ))}
       </div>

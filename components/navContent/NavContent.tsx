@@ -11,6 +11,7 @@ import { useProfileContext } from "@/contexts/ProfileContext";
 import { useAuth } from "@/contexts/AuthContext"; 
 import { showToast } from "@/utils/toast";
 
+type CountKeys = 'dears' | 'fans' | 'stars' | 'likers';
 
 const NavContent = () => {
   const t = useTranslations("common");
@@ -32,8 +33,7 @@ const NavContent = () => {
       <div className="flex flex-1 flex-col ">
         {sidebarLinks.map(({ route, imgURL, activeImgURL, label }) => {
           const isActive = pathname.startsWith(route) || pathname === route;
-          const countMap: Record<string, number | undefined> = { dears, fans, stars, likers };
-          const count = countMap[label];
+          const count = { dears, fans, stars, likers }[label as CountKeys];
           return (
             <Link
               prefetch
@@ -43,7 +43,7 @@ const NavContent = () => {
               className={`flex items-center py-3 gap-4 px-6 bg-transparent 
               transition-all duration-300 hover:bg-gray-100 hover:scale-105 
               ${
-                ["/huddles", "/stars"].includes(route)
+                ["/huddle", "/stars"].includes(route)
                   ? "border-b border-primary py-5"
                   : ""
               }`}

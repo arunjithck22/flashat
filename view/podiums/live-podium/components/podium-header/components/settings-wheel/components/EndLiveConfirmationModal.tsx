@@ -25,7 +25,9 @@ const EndLiveConfirmationModal = ({
           podiumId: params?.id?.toString() || "",
         },
         {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onSuccess: (data: any) => {
+            
             console.log("left podium through backend", data);
             notification.success({
               message: data.message,
@@ -39,6 +41,7 @@ const EndLiveConfirmationModal = ({
                 />
               ),
             });
+            closeModal()
           },
           onError: (error) => {
             const parsedError = JSON.parse(error.message);

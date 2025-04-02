@@ -15,7 +15,6 @@ import Comment from "./Comment";
 import { TranslationFunction } from "@/types";
 import { HuddleComment } from "@/types/huddles/index";
 
-
 const CommentsList = ({
   messageId,
   huddleId,

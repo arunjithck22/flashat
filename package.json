@@ -38,6 +38,7 @@
     "framer-motion": "^12.0.6",
     "idb": "^8.0.0",
     "intl-tel-input": "^24.8.2",
+    "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "libphonenumber-js": "^1.12.6",
     "lottie-react": "^2.4.0",
@@ -64,6 +65,7 @@
   "devDependencies": {
     "@types/crypto-js": "^4.2.2",
     "@types/dompurify": "^3.0.5",
+    "@types/js-cookie": "^3.0.6",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/lodash.debounce": "^4.0.9",
     "@types/lodash.throttle": "^4.1.9",

@@ -223,6 +223,10 @@ const PodiumEventListener: React.FC<PodiumEventListenerProps> = ({
     }
   }
 
+  const handleClosePodium = ()=>{
+    router.push(`/podiums/${PODIUM_TABS.LIVE_PODIUMS}`)
+  }
+
   useEffect(() => {
     if (!socket) return;
 
@@ -290,6 +294,10 @@ const PodiumEventListener: React.FC<PodiumEventListenerProps> = ({
       },
       [PODIUM_EVENTS.RESUME_PODIUM_GIFTS]: (payload) => {
         handleResumePodiumGifts(payload)
+        
+      },
+      [PODIUM_EVENTS.CLOSE]: () => {
+        handleClosePodium()
         
       },
     };

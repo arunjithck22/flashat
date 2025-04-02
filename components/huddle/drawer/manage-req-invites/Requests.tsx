@@ -20,6 +20,7 @@ import { useTranslations } from "next-intl";
 import { TranslationFunction } from "@/types";
 import { MemberRequest } from "@/types/huddles/index";
 
+
 const Requests = () => {
   const t: TranslationFunction = useTranslations("huddles");
   // const { ref, inView } = useInView();

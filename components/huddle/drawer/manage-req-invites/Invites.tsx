@@ -22,6 +22,7 @@ import { useHuddleProvider } from "@/contexts/huddles/HuddleProvider";
 import { TranslationFunction } from "@/types";
 import { Invitation } from "@/types/huddles/index";
 
+
 const Invites = () => {
   const { state } = useHuddleProvider();
   const t: TranslationFunction = useTranslations("huddles");

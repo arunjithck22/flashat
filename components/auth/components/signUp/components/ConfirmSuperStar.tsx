@@ -66,7 +66,7 @@ const ConfirmSuperStar: React.FC<ConfirmSuperStarProps> = ({ selectedSuperstar }
         setTimeout(() => {
           setIsAuthenticated(true);
           setIsModalOpen(false);
-          router.push("/huddles/public");
+          router.push("/huddle/myhuddles");
         }, 2000);
       } else {
         setErrorMessage(response?.message || "Something went wrong confirming superstar.");

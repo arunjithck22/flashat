@@ -14,7 +14,6 @@ import { useTranslations } from "next-intl";
 import { useHuddleProvider } from "@/contexts/huddles/HuddleProvider";
 import { HttpResponse, TranslationFunction } from "@/types";
 import { Members } from "@/types/huddles/index";
-
 // import group from "@assets/tw/group-line.svg";
 
 const Particpants = () => {
